@@ -1,10 +1,12 @@
 <template>
-  <div class></div>
+  <div class="auditor-analyze">
+      AuditorAnalyze
+  </div>
 </template>
 
 <script>
 export default {
-  name: "",
+  name: "AuditorAnalyze",
   data() {
     return {
       msg: ""
@@ -12,7 +14,3 @@ export default {
   }
 };
 </script>
-
-
-<style scoped>
-</style>

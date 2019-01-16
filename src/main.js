@@ -5,7 +5,9 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import '@/css/style.css' //自定义样式
+import '@/css/style.css'
+
+import MixinGlobal from "@/script/mixinGlobal";
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -13,6 +15,7 @@ Vue.use(ElementUI)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  mixins: [MixinGlobal],
   router,
   components: {
     App

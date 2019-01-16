@@ -1,45 +1,125 @@
 body {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
   margin: 0px;
   padding: 0px;
+  background-color: #fff;
+  color: #666;
+  min-width: 1000px;
+}
+
+a {
+  text-decoration: none;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+#app {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
   height: 100%;
+}
+
+.header {
+  height: 60px;
+  overflow: hidden;
+  background-color: #242f42;
+  padding: 0px 10px;
+  color: #fff;
+}
+
+.header h3 {
+  margin: 0px;
+  display: inline;
+  font-size: 28px;
+  line-height: 60px;
+}
+
+.header .operate {
+  font-size: 14px;
+  margin-top: 15px;
+  float: right;
+}
+
+.header .operate a {
+  color: #fff;
+}
+
+.main {
+  height: calc(100% - 60px);
   width: 100%;
 }
 
-label {
-  font-weight: 700;
+.main:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0px;
+  overflow: hidden;
 }
 
-html {
-  box-sizing: border-box;
+.main-left {
+  width: 200px;
+  height: 100%;
+  float: left;
+  background: #343f55;
+  overflow: hidden;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
+.main-right {
+  width: calc(100% - 200px);
+  height: 100%;
+  float: left;
+  overflow: auto;
 }
 
-.no-padding {
-  padding: 0px !important;
+.main-left .el-scrollbar {
+  height: 100%;
 }
 
-.padding-content {
-  padding: 4px 0;
+.main-left .el-scrollbar__wrap {
+  overflow-x: hidden;
 }
 
-a:focus,
-a:active {
-  outline: none;
+.main-router {
+  padding:5px 10px;
+  min-width: 1000px;
 }
 
-a,
-a:focus,
-a:hover {
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
+.header-map {
+  font-size: 16px;
+  color: #666;
+  padding-bottom: 20px;
+}
+
+.main-tool-bar {
+  min-height: 50px;
+  padding-bottom: 10px;
+}
+
+.main-tool-bar .span {
+  line-height: 50px;
+}
+
+.table-row-txt {
+  padding: 0px;
+  margin: 0px;
+  height: 24px;
+  overflow: hidden;
+}
+
+.admin-fusing,
+.admin-heartbeat,
+.admin-log,
+.admin-mobile {
+  text-align: center;
+}
+
+.admin-fusing table,
+.admin-heartbeat table,
+.admin-log table,
+.admin-mobile table {
+  margin: 0 auto;
 }
