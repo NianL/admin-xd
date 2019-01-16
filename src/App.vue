@@ -51,7 +51,7 @@
       </div>
     </template>
     <template v-else>
-      <login-page/>
+      <login-page :title="systemName" @call="loginSuccess"/>
     </template>
   </div>
 </template>
@@ -71,8 +71,11 @@ export default {
   },
   watch: {
     adminName(n, o) {
-      if (n == "admin") {
-        //this.$router.push({ name: "admin" });
+      if (n == "") {
+        this.$router.push({ name: "login" });
+      } else if (n == "admin") {
+        if (this.$router.name == undefined)
+          this.$router.push({ name: "admin-permissions" });
         this.menuData = [
           { name: "图纸访问权限设置", url: "admin-permissions" },
           { name: "终端访问熔断机制", url: "admin-fusing" },
@@ -81,7 +84,8 @@ export default {
           { name: "修改登录手机号", url: "admin-mobile" }
         ];
       } else if (n == "auditor") {
-        //this.$router.push({ name: "auditor" });
+        if (this.$router.name == undefined)
+          this.$router.push({ name: "auditor-home" });
         this.menuData = [
           { name: "主页", url: "auditor-home" },
           { name: "图纸访问分析", url: "auditor-analyze" },
@@ -89,14 +93,8 @@ export default {
             name: "图纸预览信息",
             url: "auditor-view",
             children: [
-              {
-                name: "图纸访问记录",
-                url: "auditor-view-record"
-              },
-              {
-                name: "终端熔断历史警告",
-                url: "auditor-view-warning"
-              }
+              { name: "图纸访问记录", url: "auditor-view-record" },
+              { name: "终端熔断历史警告", url: "auditor-view-warning" }
             ]
           },
           { name: "管理员审计", url: "auditor-audit" }
@@ -108,7 +106,7 @@ export default {
     loginPage: LoginPage
   },
   created() {
-    this.adminName = "auditor";
+    this.adminName = "";
     document.title = this.systemName;
     window.addEventListener("resize", () => {
       this.windowHeight = window.innerHeight;
@@ -117,10 +115,13 @@ export default {
   },
   methods: {
     logout() {
-      this.$root.m_alert("退出登录");
+      this.adminName = "";
     },
     clickMenu(item) {
       this.$router.push({ name: item.url });
+    },
+    loginSuccess(n) {
+      this.adminName = n;
     }
   }
 };
