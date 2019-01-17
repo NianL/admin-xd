@@ -1,25 +1,27 @@
 <template>
   <div class="auditor-audit">
     <div class="main-tool-bar">
-      <span class="span">操作时间：</span>
-      <el-date-picker
-        size="small "
-        v-model="searchParams.time"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-      ></el-date-picker>
-      <span class="span" style="padding-left:10px;">操作类型：</span>
-      <el-select size="small" v-model="searchParams.type" style="width:120px;">
-        <el-option label="全部" :value="0"></el-option>
-        <el-option label="开通图纸预览权限" :value="1"></el-option>
-        <el-option label="禁用图纸预览权限" :value="2"></el-option>
-        <el-option label="设置图纸预览熔断机制" :value="3"></el-option>
-        <el-option label="设置预览次数阈值" :value="4"></el-option>
-        <el-option label="设置APP心跳间隔" :value="5"></el-option>
-        <el-option label="设置日志转发" :value="6"></el-option>
-      </el-select>
+      <span class="span">操作时间：
+        <el-date-picker
+          size="small "
+          v-model="searchParams.time"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        ></el-date-picker>
+      </span>
+      <span class="span">操作类型：
+        <el-select size="small" v-model="searchParams.type">
+          <el-option label="全部" :value="0"></el-option>
+          <el-option label="开通图纸预览权限" :value="1"></el-option>
+          <el-option label="禁用图纸预览权限" :value="2"></el-option>
+          <el-option label="设置图纸预览熔断机制" :value="3"></el-option>
+          <el-option label="设置预览次数阈值" :value="4"></el-option>
+          <el-option label="设置APP心跳间隔" :value="5"></el-option>
+          <el-option label="设置日志转发" :value="6"></el-option>
+        </el-select>
+      </span>
       <el-button size="small" @click="resetData()">查询</el-button>
     </div>
     <el-table
@@ -28,7 +30,7 @@
       size="mini"
       :data="dataList"
       v-loading="paging.loading"
-      :height="height-180"
+      :height="height-170"
       @selection-change="handleSelectionChange"
     >
       <el-table-column label="序号" width="80">

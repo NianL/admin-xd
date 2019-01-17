@@ -1,31 +1,35 @@
 <template>
   <div class="auditor-view-record">
-    <div class="main-tool-bar">
-      <span class="span">请求时间：</span>
-      <el-date-picker
-        size="small "
-        v-model="searchParams.time"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-      ></el-date-picker>
-      <span class="span" style="padding-left:10px;">图纸名：</span>
-      <el-input size="small" placeholder="请输入内容" style="width:200px;"></el-input>
-      <span class="span" style="padding-left:10px;">工号：</span>
-      <el-input size="small" placeholder="请输入内容" style="width:200px;"></el-input>
-      <br>
-      <span class="span">硬件码：</span>
-      <el-input size="small" placeholder="请输入内容" style="width:200px;"></el-input>
-      <span class="span" style="padding-left:10px;">访问状态：</span>
-      <el-select size="small" v-model="searchParams.type" style="width:120px;">
-        <el-option label="全部" :value="0"></el-option>
-        <el-option label="正常预览" :value="1"></el-option>
-        <el-option label="被熔断" :value="2"></el-option>
-        <el-option label="未授权" :value="3"></el-option>
-        <el-option label="未找到图纸" :value="4"></el-option>
-        <el-option label="其他异常" :value="5"></el-option>
-      </el-select>
+    <div class="main-tool-bar" style="max-width:1300px">
+      <span class="span">请求时间：
+        <el-date-picker
+          size="small "
+          v-model="searchParams.time"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        ></el-date-picker>
+      </span>
+      <span class="span">图纸名：
+        <el-input size="small" placeholder="请输入内容"></el-input>
+      </span>
+      <span class="span">工号：
+        <el-input size="small" placeholder="请输入内容"></el-input>
+      </span>
+      <span class="span">硬件码：
+        <el-input size="small" placeholder="请输入内容"></el-input>
+      </span>
+      <span class="span">访问状态：
+        <el-select size="small" v-model="searchParams.type">
+          <el-option label="全部" :value="0"></el-option>
+          <el-option label="正常预览" :value="1"></el-option>
+          <el-option label="被熔断" :value="2"></el-option>
+          <el-option label="未授权" :value="3"></el-option>
+          <el-option label="未找到图纸" :value="4"></el-option>
+          <el-option label="其他异常" :value="5"></el-option>
+        </el-select>
+      </span>
       <el-button size="small" @click="resetData()">查询</el-button>
     </div>
     <el-table
@@ -34,7 +38,7 @@
       size="mini"
       :data="dataList"
       v-loading="paging.loading"
-      :height="height-230"
+      :height="height-210"
       @selection-change="handleSelectionChange"
     >
       <el-table-column label="序号" width="80">
@@ -86,18 +90,19 @@ export default {
         loading: false,
         total: 100
       },
-      dataList: []
+      dataList: [],
+      blankHeight: 0
     };
   },
-  created: function() {
+  created() {
     this.getData();
   },
   methods: {
-    resetData: function() {
+    resetData() {
       this.paging.page = 1;
       this.getData();
     },
-    getData: function() {
+    getData() {
       var _this = this;
       if (!this.paging.loading) {
         this.paging.loading = true;
@@ -124,10 +129,10 @@ export default {
         }, 500);
       }
     },
-    editNode: function(item) {
+    editNode(item) {
       this.$refs.permissionsEditNote.add(item);
     },
-    editPermissions: function(item) {
+    editPermissions(item) {
       var msg = "";
       if (true) msg = "开通权限后该客户端将可以预览图纸，确定要开通吗？";
       else msg = "禁用权限后该客户端将无法预览图纸，确定要禁用吗？";
@@ -156,7 +161,7 @@ export default {
           console.log("no");
         });
     },
-    handleSelectionChange: function(val) {
+    handleSelectionChange(val) {
       this.selectionRows = val;
       console.log(this.selectionRows);
     }

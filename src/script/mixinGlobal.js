@@ -1,16 +1,16 @@
 ﻿var MixinGlobal = {
-  data: function () {
+  data() {
     return {};
   },
-  created: function () {},
+  created() {},
   methods: {
-    m_alert: function (msg) {
+    m_alert(msg) {
       this.$alert(msg, "", {
         confirmButtonText: '确定',
-        callback: function (action) {}
+        callback: (action) => {}
       })
     },
-    m_confirm: function (msg) {
+    m_confirm(msg) {
       return this.$confirm(msg, '提示', {
         center: true,
         type: "warning",

@@ -101,12 +101,18 @@ a {
 }
 
 .main-tool-bar {
-  min-height: 50px;
-  padding-bottom: 10px;
+  min-height: 40px;
+  padding: 5px 0px;
 }
 
 .main-tool-bar .span {
-  line-height: 50px;
+  line-height: 40px;
+  margin-right: 5px;
+  display: inline-block;
+}
+
+.main-tool-bar .el-input {
+  width: 200px;
 }
 
 .table-row-txt {

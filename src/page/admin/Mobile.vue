@@ -3,13 +3,41 @@
     <div>
       <table cellspacing="20" cellpadding="0" border="0">
         <tr>
-          <td>管理员登录手机号：</td>
+          <th>管理员信息</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>工号：</td>
           <td>
             <el-input size="small" placeholder="请输入内容"></el-input>
           </td>
         </tr>
         <tr>
-          <td>审计员登录手机号：</td>
+          <td>&nbsp;</td>
+          <td>手机号：</td>
+          <td>
+            <el-input size="small" placeholder="请输入内容"></el-input>
+          </td>
+        </tr>
+      </table>
+      <table cellspacing="20" cellpadding="0" border="0">
+        <tr>
+          <th>审计员信息</th>
+          <th>&nbsp;</th>
+          <th>&nbsp;</th>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>工号：</td>
+          <td>
+            <el-input size="small" placeholder="请输入内容"></el-input>
+          </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>手机号：</td>
           <td>
             <el-input size="small" placeholder="请输入内容"></el-input>
           </td>
@@ -24,9 +52,7 @@
 export default {
   name: "AdminMobile",
   data() {
-    return {
-
-    };
+    return {};
   }
 };
 </script>

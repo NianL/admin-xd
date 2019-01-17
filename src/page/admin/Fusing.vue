@@ -10,13 +10,9 @@
           <th style="width:60px;">&nbsp;</th>
           <th style="width:180px;">时间段（单位：小时）</th>
           <th style="width:180px;">预览次数（单位：次）</th>
-          <th style="width:180px;">熔断时间（单位：小时）</th>
         </tr>
         <tr>
           <td>规则1：</td>
-          <td>
-            <el-input size="small" placeholder="请输入内容"></el-input>
-          </td>
           <td>
             <el-input size="small" placeholder="请输入内容"></el-input>
           </td>
@@ -32,15 +28,9 @@
           <td>
             <el-input size="small" placeholder="请输入内容"></el-input>
           </td>
-          <td>
-            <el-input size="small" placeholder="请输入内容"></el-input>
-          </td>
         </tr>
         <tr>
           <td>规则3：</td>
-          <td>
-            <el-input size="small" placeholder="请输入内容"></el-input>
-          </td>
           <td>
             <el-input size="small" placeholder="请输入内容"></el-input>
           </td>

@@ -1,17 +1,19 @@
 <template>
   <div class="auditor-view-warning">
     <div class="main-tool-bar">
-      <span class="span">熔断时间：</span>
-      <el-date-picker
-        size="small "
-        v-model="searchParams.time"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-      ></el-date-picker>
-      <span class="span" style="padding-left:10px;">硬件码：</span>
-      <el-input size="small" placeholder="请输入内容" style="width:200px;"></el-input>
+      <span class="span">熔断时间：
+        <el-date-picker
+          size="small"
+          v-model="searchParams.time"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        ></el-date-picker>
+      </span>
+      <span class="span">硬件码：
+        <el-input size="small" placeholder="请输入内容"></el-input>
+      </span>
       <el-button size="small" @click="resetData()">查询</el-button>
     </div>
     <el-table
@@ -20,7 +22,7 @@
       size="mini"
       :data="dataList"
       v-loading="paging.loading"
-      :height="height-180"
+      :height="height-170"
       @selection-change="handleSelectionChange"
     >
       <el-table-column label="序号" width="80">

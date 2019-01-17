@@ -1,14 +1,15 @@
 <template>
   <div class="admin-permissions">
     <div class="main-tool-bar">
-      <span class="span" style="padding-left:10px;">访问权限：</span>
-      <el-select size="small" v-model="searchParams.permissions" style="width:120px;">
-        <el-option label="全部" :value="0"></el-option>
-        <el-option label="已开通" :value="1"></el-option>
-        <el-option label="未开通" :value="2"></el-option>
-        <el-option label="已禁用" :value="3"></el-option>
-        <el-option label="被熔断" :value="4"></el-option>
-      </el-select>
+      <span class="span">访问权限：
+        <el-select size="small" v-model="searchParams.permissions">
+          <el-option label="全部" :value="0"></el-option>
+          <el-option label="已开通" :value="1"></el-option>
+          <el-option label="未开通" :value="2"></el-option>
+          <el-option label="已禁用" :value="3"></el-option>
+          <el-option label="被熔断" :value="4"></el-option>
+        </el-select>
+      </span>
       <el-button size="small" @click="resetData()">查询</el-button>
       <el-button size="small">导出Excel</el-button>
       <el-button size="small">批量开通</el-button>
@@ -20,7 +21,7 @@
       size="mini"
       :data="dataList"
       v-loading="paging.loading"
-      :height="height-180"
+      :height="height-170"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="40"></el-table-column>
