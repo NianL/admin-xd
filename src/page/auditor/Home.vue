@@ -26,20 +26,52 @@
       <el-button size="small">保存统计条件</el-button>
     </div>
     <div>
-      饼状图
+      <charts-request :data="chartsData"/>
+    </div>
+    <div style="padding-bottom:5px;">
+      <b>终端熔断告警列表：</b>
     </div>
     <div>
-      <b>终端熔断告警列表：</b>
+      <fusing-warning/>
     </div>
   </div>
 </template>
 
 <script>
+import ChartsRequest from "@/components/ChartsRequest";
+import FusingWarning from "@/components/FusingWarning";
+
 export default {
   name: "AuditorHome",
+  components: {
+    chartsRequest: ChartsRequest,
+    fusingWarning: FusingWarning
+  },
   data() {
     return {
-      searchParams: {}
+      searchParams: {},
+      chartsData: [
+        {
+          name: "正常预览",
+          y: 800
+        },
+        {
+          name: "被熔断",
+          y: 200
+        },
+        {
+          name: "未授权",
+          y: 100
+        },
+        {
+          name: "未找到的图纸文件",
+          y: 300
+        },
+        {
+          name: "其他异常",
+          y: 100
+        }
+      ]
     };
   }
 };

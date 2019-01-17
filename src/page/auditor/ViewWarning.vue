@@ -75,22 +75,22 @@ export default {
       dataList: []
     };
   },
-  created: function() {
+  created() {
     this.getData();
   },
   methods: {
-    resetData: function() {
+    resetData() {
       this.paging.page = 1;
       this.getData();
     },
-    getData: function() {
+    getData() {
       var _this = this;
       if (!this.paging.loading) {
         this.paging.loading = true;
 
         // DataAccess.({
 
-        // }).then(function (res) {
+        // }).then( (res)=> {
         //     var data = res.data;
         //     if (data.status.code == 1) {
         //         _this.dataList = data.data.dataList;
@@ -99,32 +99,29 @@ export default {
         //         _this.$message.error(data.status.msg);
         //     }
         //     _this.paging.loading = false;
-        // }).catch(function () {
+        // }).catch( ()=> {
         //     _this.$message.error("error");
         //     _this.paging.loading = false;
         // });
-        setTimeout(function() {
+        setTimeout(() => {
           _this.dataList = [];
           for (var i = 0; i < _this.paging.rows; i++) _this.dataList.push({});
           _this.paging.loading = false;
         }, 500);
       }
     },
-    editNode: function(item) {
-      this.$refs.permissionsEditNote.add(item);
-    },
-    editPermissions: function(item) {
+    editPermissions(item) {
       var msg = "";
       if (true) msg = "开通权限后该客户端将可以预览图纸，确定要开通吗？";
       else msg = "禁用权限后该客户端将无法预览图纸，确定要禁用吗？";
 
       this.$root
         .m_confirm(msg)
-        .then(function() {
+        .then(() => {
           console.log("ok");
           // DataAccess.({
           //     itemID: item.itemID
-          // }).then(function (res) {
+          // }).then( (res)=> {
           //     var data = res.data;
           //     if (data.status.code == 1) {
           //         _this.$message.success('删除成功!');
@@ -134,15 +131,15 @@ export default {
           //     } else {
           //         _this.m_alert(data.status.msg);
           //     }
-          // }).catch(function () {
+          // }).catch( ()=> {
           //     _this.m_alert("error");
           // });
         })
-        .catch(function() {
+        .catch(() => {
           console.log("no");
         });
     },
-    handleSelectionChange: function(val) {
+    handleSelectionChange(val) {
       this.selectionRows = val;
       console.log(this.selectionRows);
     }

@@ -109,7 +109,7 @@ export default {
 
         // DataAccess.({
 
-        // }).then(function (res) {
+        // }).then( (res)=> {
         //     var data = res.data;
         //     if (data.status.code == 1) {
         //         _this.dataList = data.data.dataList;
@@ -118,19 +118,16 @@ export default {
         //         _this.$message.error(data.status.msg);
         //     }
         //     _this.paging.loading = false;
-        // }).catch(function () {
+        // }).catch( ()=> {
         //     _this.$message.error("error");
         //     _this.paging.loading = false;
         // });
-        setTimeout(function() {
+        setTimeout(()=> {
           _this.dataList = [];
           for (var i = 0; i < _this.paging.rows; i++) _this.dataList.push({});
           _this.paging.loading = false;
         }, 500);
       }
-    },
-    editNode(item) {
-      this.$refs.permissionsEditNote.add(item);
     },
     editPermissions(item) {
       var msg = "";
@@ -139,11 +136,11 @@ export default {
 
       this.$root
         .m_confirm(msg)
-        .then(function() {
+        .then(()=> {
           console.log("ok");
           // DataAccess.({
           //     itemID: item.itemID
-          // }).then(function (res) {
+          // }).then( (res)=> {
           //     var data = res.data;
           //     if (data.status.code == 1) {
           //         _this.$message.success('删除成功!');
@@ -153,11 +150,11 @@ export default {
           //     } else {
           //         _this.m_alert(data.status.msg);
           //     }
-          // }).catch(function () {
+          // }).catch( ()=> {
           //     _this.m_alert("error");
           // });
         })
-        .catch(function() {
+        .catch(()=> {
           console.log("no");
         });
     },

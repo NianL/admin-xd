@@ -1,46 +1,28 @@
 <template>
-  <div class="auditor-audit">
-    <div class="main-tool-bar">
-      <span class="span">操作时间：
-        <el-date-picker
-          size="small "
-          v-model="searchParams.time"
-          type="daterange"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
-      </span>
-      <span class="span">操作类型：
-        <el-select size="small" v-model="searchParams.type">
-          <el-option label="全部" :value="0"></el-option>
-          <el-option label="开通图纸预览权限" :value="1"></el-option>
-          <el-option label="禁用图纸预览权限" :value="2"></el-option>
-          <el-option label="设置图纸预览熔断机制" :value="3"></el-option>
-          <el-option label="设置预览次数阈值" :value="4"></el-option>
-          <el-option label="设置APP心跳间隔" :value="5"></el-option>
-          <el-option label="设置日志转发" :value="6"></el-option>
-        </el-select>
-      </span>
-      <el-button size="small" @click="resetData()">查询</el-button>
-    </div>
+  <div class="fusing-warning">
     <el-table
       border
       stripe
       size="mini"
       :data="dataList"
       v-loading="paging.loading"
-      :height="height-170"
-      @selection-change="handleSelectionChange"
     >
       <el-table-column label="序号" width="80">
         <template slot-scope="scope">
           <div v-text="(paging.page-1)*paging.rows+scope.$index+1"></div>
         </template>
       </el-table-column>
-      <el-table-column prop="x" label="操作时间"></el-table-column>
-      <el-table-column prop="x" label="操作类型"></el-table-column>
-      <el-table-column prop="x" label="操作详情"></el-table-column>
+      <el-table-column prop="x" label="硬件码"></el-table-column>
+      <el-table-column prop="x" label="设备名"></el-table-column>
+      <el-table-column prop="x" label="IP"></el-table-column>
+      <el-table-column prop="x" label="工号"></el-table-column>
+      <el-table-column prop="x" label="熔断时间"></el-table-column>
+      <el-table-column prop="x" label="详情"></el-table-column>
+      <el-table-column label="操作" width="100">
+        <template slot-scope="scope">
+          <el-button type="text" size="mini" @click="hideItem(scope.row)">隐藏</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <div style="margin-top: 10px;" v-if="paging.total>0">
       <el-pagination
@@ -58,18 +40,11 @@
 
 <script>
 export default {
-  name: "AuditorAudit",
-  props: {
-    height: {
-      type: Number,
-      default: 0
-    }
-  },
+  name: "FusingWarning",
   data() {
     return {
       searchParams: {
-        time: [],
-        type: 0
+        permissions: 0
       },
       paging: {
         page: 1,
@@ -95,7 +70,7 @@ export default {
 
         // DataAccess.({
 
-        // }).then( (res)=> {
+        // }).then( res => {
         //     var data = res.data;
         //     if (data.status.code == 1) {
         //         _this.dataList = data.data.dataList;
@@ -115,10 +90,9 @@ export default {
         }, 500);
       }
     },
-    editPermissions(item) {
-      var msg = "";
-      if (true) msg = "开通权限后该客户端将可以预览图纸，确定要开通吗？";
-      else msg = "禁用权限后该客户端将无法预览图纸，确定要禁用吗？";
+    hideItem(item) {
+      var msg =
+        "隐藏后只能在【历史报警记录】中查看，且需要管理员在后台重新开通访问权限才能正常访问。您确认要隐藏该记录吗？";
 
       this.$root
         .m_confirm(msg)
@@ -143,10 +117,6 @@ export default {
         .catch(() => {
           console.log("no");
         });
-    },
-    handleSelectionChange(val) {
-      this.selectionRows = val;
-      console.log(this.selectionRows);
     }
   }
 };
