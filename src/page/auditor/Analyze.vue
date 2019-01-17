@@ -62,7 +62,7 @@ export default {
   },
   watch: {
     currentTab() {
-      this.loadData();
+      this.getData();
     }
   },
   created() {
