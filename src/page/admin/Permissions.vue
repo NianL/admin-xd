@@ -23,6 +23,7 @@
       v-loading="paging.loading"
       :height="height-170"
       @selection-change="handleSelectionChange"
+      @sort-change="handleSortChange"
     >
       <el-table-column type="selection" width="40"></el-table-column>
       <el-table-column label="序号" width="80">
@@ -33,7 +34,7 @@
       <el-table-column prop="x" label="第一次访问时间" width="200"></el-table-column>
       <el-table-column prop="x" label="第一次访问工号" width="150"></el-table-column>
       <el-table-column prop="x" label="硬件码"></el-table-column>
-      <el-table-column prop="x" label="客户端" width="150"></el-table-column>
+      <el-table-column prop="x" label="客户端" sortable width="150"></el-table-column>
       <el-table-column prop="x" label="访问权限" width="150"></el-table-column>
       <el-table-column label="备注">
         <template slot-scope="scope">
@@ -153,6 +154,10 @@ export default {
     handleSelectionChange(val) {
       this.selectionRows = val;
       console.log(this.selectionRows);
+    },
+    handleSortChange(column, prop, order) {
+      console.log(column, prop, order);
+      this.resetData();
     }
   }
 };
