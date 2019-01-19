@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import $Http from "@/script/dataAccess";
+import $Http from "@/script/DataAccess";
 
 export default {
   name: "login",

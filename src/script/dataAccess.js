@@ -27,6 +27,18 @@ DataAccess.demo = (p) => {
 }
 
 // GET
+// 1.4 获取熔断规则
+DataAccess.GetFuseRule = (p) => {
+  return HttpRequest.get("/api/Admin/GetFuseRule", p);
+}
+
+// POST
+// 1.5 设置熔断规则
+DataAccess.SetFuseRule = (p) => {
+  return HttpRequest.post("/api/Admin/SetFuseRule", p);
+}
+
+// GET
 // 1.6 获取心跳间隔
 DataAccess.GetHeartBeat = (p) => {
   return HttpRequest.get("/api/Admin/GetHeartBeat", p);

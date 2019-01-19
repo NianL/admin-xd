@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-log">
+  <div class="admin-log" v-loading="loading">
     <div>
       <p>日志转发：是指把客户端预览图纸的记录、服务器应用程序异常记录都转发到指定服务器。</p>
       <p>接收服务器：以IP、端口号方式配置。</p>
@@ -42,13 +42,13 @@
           <td>（请输入1~65535之间的数值）</td>
         </tr>
       </table>
-      <el-button size="small" type="primary" :loading="saveWaiting" @click="setData()">保存设置</el-button>
+      <el-button size="small" type="primary" @click="setData()">保存设置</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import $Http from "@/script/dataAccess";
+import $Http from "@/script/DataAccess";
 
 export default {
   name: "AdminLog",
@@ -59,7 +59,7 @@ export default {
         ip: "",
         port: ""
       },
-      saveWaiting: false
+      loading: false
     };
   },
   created() {
@@ -67,11 +67,13 @@ export default {
   },
   methods: {
     getData() {
+      this.loading = true;
       $Http.GetLogTransSettings().then(res => {
         let data = res.data;
         if (data.status.code == 1) {
           this.data = JSON.parse(data.data.transSettings);
         }
+        this.loading = false;
       });
     },
     setData() {
@@ -84,7 +86,7 @@ export default {
         return;
       }
 
-      this.saveWaiting = true;
+      this.loading = true;
       $Http
         .SetLogTransSettings({
           transSettings: JSON.stringify(this.data)
@@ -96,7 +98,7 @@ export default {
           } else {
             this.$message.error(data.status.msg);
           }
-          this.saveWaiting = false;
+          this.loading = false;
         });
     },
     dataPortBlur() {

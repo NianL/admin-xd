@@ -59,7 +59,7 @@
 <script>
 import LoginPage from "@/page/Login";
 import Common from "@/script/Common";
-import $Http from "@/script/dataAccess";
+import $Http from "@/script/DataAccess";
 
 export default {
   name: "App",

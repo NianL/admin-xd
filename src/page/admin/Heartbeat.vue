@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-heartbeat">
+  <div class="admin-heartbeat" v-loading="loading">
     <div>
       <p>APP心跳：是指在APP设备上预览图纸时，设备和服务器之间需要定时发送心跳包，以确保当前用户还在使用APP。</p>
       <p>心跳间隔：仅支持以分为单位，最短1分钟、最长60分钟。</p>
@@ -22,18 +22,13 @@
           </td>
         </tr>
       </table>
-      <el-button
-        size="small"
-        type="primary"
-        :loading="saveWaiting"
-        @click="setData()"
-      >保存设置</el-button>
+      <el-button size="small" type="primary" @click="setData()">保存设置</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import $Http from "@/script/dataAccess";
+import $Http from "@/script/DataAccess";
 
 export default {
   name: "AdminHeartbeat",
@@ -42,7 +37,7 @@ export default {
       data: {
         heartBeat: ""
       },
-      saveWaiting: false
+      loading: false
     };
   },
   created() {
@@ -50,11 +45,14 @@ export default {
   },
   methods: {
     getData() {
+      this.loading = true;
       $Http.GetHeartBeat().then(res => {
         let data = res.data;
         if (data.status.code == 1) {
-          this.data = data.data;
+          if (data.data.heartBeat != "")
+            this.data.heartBeat = data.data.heartBeat;
         }
+        this.loading = false;
       });
     },
     setData() {
@@ -63,7 +61,7 @@ export default {
         return;
       }
 
-      this.saveWaiting = true;
+      this.loading = true;
       $Http
         .SetHeartBeat({
           heartBeat: this.data.heartBeat
@@ -75,7 +73,7 @@ export default {
           } else {
             this.$message.error(data.status.msg);
           }
-          this.saveWaiting = false;
+          this.loading = false;
         });
     }
   }

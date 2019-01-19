@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-mobile">
+  <div class="admin-mobile" v-loading="loading">
     <div>
       <template v-for="(item,index) in data">
         <table cellspacing="20" cellpadding="0" border="0" :key="index">
@@ -21,7 +21,6 @@
                   maxlength="20"
                   style="width:200px;"
                   v-model.trim="item.workNo"
-                  @blur="dataWorkNoBlur(item)"
                 >
               </div>
             </td>
@@ -36,21 +35,20 @@
                   maxlength="11"
                   style="width:200px;"
                   v-model.trim="item.mobile"
-                  @blur="dataMobileBlur(item)"
                 >
               </div>
             </td>
           </tr>
         </table>
       </template>
-      <el-button size="small" type="primary" :loading="saveWaiting" @click="setData()">保存设置</el-button>
+      <el-button size="small" type="primary" @click="setData()">保存设置</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import Common from "@/script/Common";
-import $Http from "@/script/dataAccess";
+import $Http from "@/script/DataAccess";
 
 export default {
   name: "AdminMobile",
@@ -60,7 +58,7 @@ export default {
         { type: "1", workNo: "", mobile: "" },
         { type: "2", workNo: "", mobile: "" }
       ],
-      saveWaiting: false
+      loading: false
     };
   },
   created() {
@@ -68,12 +66,14 @@ export default {
   },
   methods: {
     getData() {
+      this.loading = true;
       $Http.GetMobileSettings().then(res => {
         let data = res.data;
         if (data.status.code == 1) {
           data = JSON.parse(data.data.mobileSettings);
           if (data.length == 2) this.data = data;
         }
+        this.loading = false;
       });
     },
     setData() {
@@ -82,9 +82,13 @@ export default {
           this.$root.m_alert("请填写所有信息");
           return;
         }
+        if (!Common.isMobile(this.data[i].mobile)) {
+          this.$root.m_alert("手机号格式错误");
+          return;
+        }
       }
 
-      this.saveWaiting = true;
+      this.loading = true;
       $Http
         .SetMobileSettings({
           mobileSettings: JSON.stringify(this.data)
@@ -96,15 +100,8 @@ export default {
           } else {
             this.$message.error(data.status.msg);
           }
-          this.saveWaiting = false;
+          this.loading = false;
         });
-    },
-    dataWorkNoBlur(item) {},
-    dataMobileBlur(item) {
-      if (!Common.isMobile(item.mobile)) {
-        item.mobile = "";
-        this.$root.m_alert("请输入正确的手机号");
-      }
     }
   }
 };
